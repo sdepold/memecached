@@ -1,0 +1,15 @@
+extends layout
+
+block append content
+  h1= title
+
+  form(enctype="multipart/form-data", method="post", action="/admin/create")
+    label(for="name") Name:
+    input(type="text", name="name", id="name")
+
+    br
+    label(for="file") File:
+    input(type="file", name="file", id="file")
+
+    br
+    input(type="submit", value="Create")
