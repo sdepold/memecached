@@ -1,5 +1,7 @@
 "use strict";
 
+var mime = require("mime");
+
 module.exports = function(sequelize, DataTypes) {
   var Entry = sequelize.define("Entry", {
     name:     DataTypes.STRING,
@@ -8,9 +10,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     instanceMethods: {
       imagePath: function () {
-        return "/entries/" + this.id + ""
-        console.log(this, arguments)
-        return ""
+        return "/entries/" + this.id + "." + mime.extension(this.mimeType)
       }
     },
 

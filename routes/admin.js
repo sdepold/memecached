@@ -4,6 +4,7 @@ var models = require("../models");
 var passport = require('passport');
 var multipart = require('connect-multiparty');
 var fs = require("fs");
+var mime = require("mime");
 
 var loginRequired = passport.authenticate('session', { failureRedirect: "/admin/login", failureFlash: true, successFlash: true });
 
@@ -18,11 +19,13 @@ router.get('/', loginRequired, function (req, res) {
 });
 
 router.post('/create', loginRequired, multipart(), function (req, res) {
-  var data = fs.readFileSync(req.files.file.path);
+  var filePath = req.files.file.path;
+  var data     = fs.readFileSync(filePath);
 
   models.Entry.create({
-    data: data,
-    name: req.param("name")
+    data:     data,
+    name:     req.param("name"),
+    mimeType: mime.lookup(filePath)
   }).success(function () {
     req.flash("success", "Entry successfully saved!")
     res.redirect("/admin")
