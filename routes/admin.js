@@ -3,21 +3,31 @@ var router = express.Router();
 var models = require("../models");
 var passport = require('passport');
 var multipart = require('connect-multiparty');
-passport.use(models.User.createStrategy());
-passport.serializeUser(models.User.serializeUser());
-passport.deserializeUser(models.User.deserializeUser());
+var fs = require("fs");
 
 var loginRequired = passport.authenticate('session', { failureRedirect: "/admin/login", failureFlash: true, successFlash: true });
 
 router.get('/', loginRequired, function (req, res) {
-    res.render("admin/index", { title: "Admin | Index", flash: req.flash() })
-  }
-);
+  models.Entry.findAll().success(function (entries) {
+    res.render("admin/index", {
+      title: "Admin | Index",
+      flash: req.flash(),
+      entries: entries
+    });
+  });
+});
 
 router.post('/create', loginRequired, multipart(), function (req, res) {
-    console.log(req.body, req.files);
-  }
-);
+  var data = fs.readFileSync(req.files.file.path);
+
+  models.Entry.create({
+    data: data,
+    name: req.param("name")
+  }).success(function () {
+    req.flash("success", "Entry successfully saved!")
+    res.redirect("/admin")
+  })
+});
 
 router.get('/login', function(req, res) {
   res.render('admin/login', { title: "Admin | Login", flash: req.flash() });

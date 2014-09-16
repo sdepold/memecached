@@ -10,10 +10,6 @@ var session = require('express-session');
 var passport = require('passport');
 var models = require('./models');
 
-var routes = require('./routes/index');
-var users = require('./routes/users');
-var admin = require('./routes/admin');
-
 var app = express();
 
 // view engine setup
@@ -36,9 +32,9 @@ passport.use(models.User.createStrategy());
 passport.serializeUser(models.User.serializeUser());
 passport.deserializeUser(models.User.deserializeUser());
 
-app.use('/', routes);
-app.use('/users', users);
-app.use('/admin', admin);
+app.use('/', require('./routes/index'));
+app.use('/admin', require('./routes/admin'));
+app.use('/entries', require("./routes/entries"));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

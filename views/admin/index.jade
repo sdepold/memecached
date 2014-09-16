@@ -3,6 +3,8 @@ extends layout
 block append content
   h1= title
 
+  h2 Create a new entry
+
   form(enctype="multipart/form-data", method="post", action="/admin/create")
     label(for="name") Name:
     input(type="text", name="name", id="name")
@@ -13,3 +15,11 @@ block append content
 
     br
     input(type="submit", value="Create")
+
+  h2 Stored entries
+
+  ul
+    each entry in entries
+      li
+        = entry.name
+        img(src=entry.imagePath())
