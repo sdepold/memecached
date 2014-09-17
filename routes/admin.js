@@ -36,6 +36,12 @@ router.get('/login', function(req, res) {
   res.render('admin/login', { title: "Admin | Login", flash: req.flash() });
 });
 
+router.get('/logout', function(req, res) {
+  req.logout();
+  req.flash("success", "Logout successful!");
+  res.redirect("/");
+});
+
 router.post('/login', function (req, res, next) {
   if (req.param("button") === "Register") {
     handleRegistration(req, res)
