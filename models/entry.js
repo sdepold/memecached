@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     instanceMethods: {
       imagePath: function () {
-        return "/entries/" + this.id + "." + mime.extension(this.mimeType)
+        return "/entries/" + this.id + "." + mime.extension(this.mimeType);
       }
     },
 

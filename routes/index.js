@@ -1,9 +1,10 @@
-var express = require('express');
+"use strict";
+
+var express = require("express");
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', { title: 'Express', flash: req.flash() });
+router.get("/", function(req, res) {
+  res.render("index", { title: "Express", flash: req.flash() });
 });
 
 module.exports = router;

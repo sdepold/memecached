@@ -24,6 +24,8 @@
     "sqlite3": "^2.2.7"
   },
   "devDependencies": {
+    "gulp": "^3.8.8",
+    "gulp-jshint": "^1.8.4",
     "nodemon": "^1.2.1",
     "sequelize-cli": "^0.2.5"
   }

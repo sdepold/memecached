@@ -3,15 +3,15 @@
 module.exports = {
   up: function(migration, DataTypes, done) {
     migration
-      .createTable('Users', {
+      .createTable("Users", {
         name: DataTypes.STRING
       })
-      .complete(done)
+      .complete(done);
   },
 
   down: function(migration, DataTypes, done) {
     migration
-      .dropTable('Users')
-      .complete(done)
+      .dropTable("Users")
+      .complete(done);
   }
 };
