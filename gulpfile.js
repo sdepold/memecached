@@ -16,7 +16,8 @@ gulp.task("lint", function () {
       path.resolve(__dirname, "bin", "*"),
       path.resolve(__dirname, "migrations", "**", "*"),
       path.resolve(__dirname, "models", "**", "*"),
-      path.resolve(__dirname, "routes", "**", "*")
+      path.resolve(__dirname, "routes", "**", "*"),
+      path.resolve(__dirname, "test", "**", "*")
     ])
     .pipe(jshint())
     .pipe(jshint.reporter("default"))

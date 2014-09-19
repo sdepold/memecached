@@ -1,15 +1,17 @@
+"use strict";
+
 module.exports = {
   up: function(migration, DataTypes, done) {
     migration
-      .createTable('Sessions', {
+      .createTable("Sessions", {
         sid: DataTypes.STRING,
         data: DataTypes.TEXT
       })
-      .complete(done)
+      .complete(done);
   },
   down: function(migration, DataTypes, done) {
     migration
-      .dropTable('Sessions')
-      .complete(done)
+      .dropTable("Sessions")
+      .complete(done);
   }
-}
+};

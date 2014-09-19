@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     password: DataTypes.STRING
   }, {
     classMethods: {
-      associate: function(models) {
+      associate: function(/*models*/) {
          // associations can be defined here
       }
     }

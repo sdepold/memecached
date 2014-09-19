@@ -6,11 +6,11 @@ module.exports = function(sequelize, DataTypes) {
     data: DataTypes.TEXT
   }, {
     classMethods: {
-      associate: function(models) {
+      associate: function(/*models*/) {
          // associations can be defined here
       }
     }
   });
 
   return Session;
-}
+};

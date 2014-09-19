@@ -4,9 +4,6 @@ var express = require("express");
 var router = express.Router();
 var models = require("../models");
 var passport = require("../lib/passport");
-var multipart = require("connect-multiparty");
-var fs = require("fs");
-var mime = require("mime");
 
 router.get("/new", function(req, res) {
   res.render("sessions/new", { title: "Sessions | New", flash: req.flash() });
