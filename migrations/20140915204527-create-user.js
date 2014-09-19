@@ -4,7 +4,8 @@ module.exports = {
   up: function(migration, DataTypes, done) {
     migration
       .createTable("Users", {
-        name: DataTypes.STRING
+        username: DataTypes.STRING,
+        password: DataTypes.STRING
       })
       .complete(done);
   },

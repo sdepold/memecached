@@ -8,7 +8,8 @@ var bodyParser = require("body-parser");
 var flash = require("connect-flash");
 
 var session = require("express-session");
-var passport = require("passport");
+var SequelizeStore = require("connect-session-sequelize")(session.Store);
+var passport = require("./lib/passport");
 var models = require("./models");
 
 var app = express();
@@ -22,19 +23,23 @@ app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({ secret: "my-secret"}));
+app.use(session({
+  secret: "my-secret",
+  store: new SequelizeStore({
+    db: models.sequelize
+  })
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use(express["static"](path.join(__dirname, "public")));
 
 // user management
-passport.use(models.User.createStrategy());
-passport.serializeUser(models.User.serializeUser());
-passport.deserializeUser(models.User.deserializeUser());
+require("./lib/passport");
 
 // route attachments
 app.use("/", require("./routes/index"));
+app.use("/sessions", require("./routes/sessions"));
 app.use("/admin", require("./routes/admin"));
 app.use("/entries", require("./routes/entries"));
 
@@ -68,6 +73,5 @@ app.use(function(err, req, res) {
         error: {}
     });
 });
-
 
 module.exports = app;
